@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.Ee6hBPzbZTkLUMtq8jNdnW4Aqs13C0VK}`
+      "Authorization": `Bearer ${process.env.MISTRAL_API_KEY}`
     },
     body: JSON.stringify({
       model: "mistral-small-latest",
@@ -16,6 +16,6 @@ export default async function handler(req, res) {
   const data = await response.json();
 
   res.status(200).json({
-    reply: data.choices[0].message.content
+    reply: data.choices?.[0]?.message?.content || "No response"
   });
 }
